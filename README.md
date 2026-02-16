@@ -1,13 +1,13 @@
 <div class="filament-hidden">
 
-![Filament Topbar](https://raw.githubusercontent.com/jeffersongoncalves/filament-topbar/2.x/art/jeffersongoncalves-filament-topbar.png)
+![Filament Topbar](https://raw.githubusercontent.com/jeffersongoncalves/filament-topbar/3.x/art/jeffersongoncalves-filament-topbar.png)
 
 </div>
 
 # Filament Topbar
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jeffersongoncalves/filament-topbar.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-topbar)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/filament-topbar/fix-php-code-style-issues.yml?branch=2.x&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/filament-topbar/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3A2.x)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/filament-topbar/fix-php-code-style-issues.yml?branch=3.x&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/filament-topbar/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3A3.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/jeffersongoncalves/filament-topbar.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-topbar)
 
 ## Description
@@ -16,9 +16,9 @@ A simple yet effective Filament plugin that automatically adds a customized topb
 
 ## Preview
 
-![Preview Topbar Navigation](https://raw.githubusercontent.com/jeffersongoncalves/filament-topbar/2.x/art/preview-topbar-navigation.png)
+![Preview Topbar Navigation](https://raw.githubusercontent.com/jeffersongoncalves/filament-topbar/3.x/art/preview-topbar-navigation.png)
 
-![Preview Topbar Navigation Mobile](https://raw.githubusercontent.com/jeffersongoncalves/filament-topbar/2.x/art/preview-topbar-navigation-mobile.png)
+![Preview Topbar Navigation Mobile](https://raw.githubusercontent.com/jeffersongoncalves/filament-topbar/3.x/art/preview-topbar-navigation-mobile.png)
 
 ## Features
 
