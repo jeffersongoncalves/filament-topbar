@@ -1,6 +1,6 @@
 <div class="filament-hidden">
 
-![Filament Topbar](https://raw.githubusercontent.com/jeffersongoncalves/filament-topbar/1.x/art/jeffersongoncalves-filament-topbar.png)
+![Filament Topbar](https://raw.githubusercontent.com/jeffersongoncalves/filament-topbar/1.x/art/jeffersongoncalves-filament-topbar.jpg)
 
 </div>
 
