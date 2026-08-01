@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           # Fetch entire history of repository to ensure release date can be
           # extracted from commit of the given tag.
@@ -32,7 +32,7 @@ jobs:
           echo "date=$(git log -1 --date=short --format=%ad '${{ github.event.release.tag_name }}')" >> $GITHUB_OUTPUT;
 
       - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
+        uses: stefanzweifel/changelog-updater-action@a938690fad7edf25368f37e43a1ed1b34303eb36 # v1
         with:
           # Pass extracted release date, release notes and version to the Action.
           release-date: ${{ steps.release_date.outputs.date }}
@@ -63,7 +63,7 @@ jobs:
         run: "echo ${{ steps.changelog-updater.outputs.unreleased_compare_url }}"
 
       - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v6
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0 # v6
         with:
           # Push updated CHANGELOG to release target branch.
           branch: ${{ github.event.release.target_commitish }}
