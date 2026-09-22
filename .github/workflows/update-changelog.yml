@@ -1,71 +1,43 @@
-# .github/workflows/update-changelog.yaml
 name: "Update Changelog"
 
 on:
   release:
     types: [released]
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
 
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the
-      # updated CHANGELOG back to the repository.
-      # https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/
-      contents: write
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          # Fetch entire history of repository to ensure release date can be
-          # extracted from commit of the given tag.
+          # Full history so the release date can be read from the tag.
           fetch-depth: 0
-          # Checkout target branch of this release. Ensures that the CHANGELOG
-          # is not out of date.
+          # Create releases with `--target <branch>` (e.g. 2.x), never a commit SHA.
           ref: ${{ github.event.release.target_commitish }}
 
       - name: Extract release date from git tag
         id: release_date
+        env:
+          TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
-          echo "date=$(git log -1 --date=short --format=%ad '${{ github.event.release.tag_name }}')" >> $GITHUB_OUTPUT;
+          echo "date=$(git log -1 --date=short --format=%ad "refs/tags/$TAG_NAME")" >> "$GITHUB_OUTPUT"
 
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@a938690fad7edf25368f37e43a1ed1b34303eb36 # v1
         with:
-          # Pass extracted release date, release notes and version to the Action.
           release-date: ${{ steps.release_date.outputs.date }}
           release-notes: ${{ github.event.release.body }}
           latest-version: ${{ github.event.release.tag_name }}
           compare-url-target-revision: ${{ github.event.release.target_commitish }}
 
-          # Optional
-          # If your project keeps separate branches for major releases, and you want to point the compare URL
-          # in the "Unreleased"-heading to the corresponding major release branch (eg. `2.x`), then enable the option
-          # below.
-          # `compare-url-target-revision` will change how the compare URL is composed and will replace
-          # `v2.0.1...HEAD` with `v2.0.1...2.x`.
-          # WARNING: When you select `main` when creating a new release, the value `refs/heads/main`
-          # is passed to the Action which will generate an invalid compare URL.
-          # compare-url-target-revision: ${{ github.event.release.target_commitish }}
-
-      - name: "release_compare_url"
-        # https://github.com/org/repo/compare/v1.0.0...v1.1.0
-        run: "echo ${{ steps.changelog-updater.outputs.release_compare_url }}"
-
-      - name: "release_url_fragment"
-        # #v100---2021-02-01
-        run: "echo ${{ steps.changelog-updater.outputs.release_url_fragment }}"
-
-      - name: "unreleased_compare_url"
-        # https://github.com/org/repo/compare/v1.0.0...HEAD
-        run: "echo ${{ steps.changelog-updater.outputs.unreleased_compare_url }}"
-
       - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7
         with:
-          # Push updated CHANGELOG to release target branch.
           branch: ${{ github.event.release.target_commitish }}
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
