@@ -1,12 +1,99 @@
-# Please see the documentation for all configuration options:
-# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+# Standard Dependabot config (dependabot-std).
+# Weekly, grouped, 7-day cooldown (time to catch a malicious release).
+# One entry per ecosystem for every version branch; Dependabot reads this file from the default branch only.
+# Filament majors are ignored so no branch ever gets a cross-major bump: 1.x = Filament 3, 2.x = Filament 4, 3.x = Filament 5.
+# Explicit `versions` ranges, not `update-types`: without a composer.lock Dependabot skips update-types.
 
 version: 2
+
 updates:
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  # ---------- 1.x ----------
+
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: 1.x
     schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions-deps:
+        patterns:
+          - '*'
+
+  - package-ecosystem: composer
+    directory: /
+    target-branch: 1.x
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: filament/*
+        versions:
+          - '>=4.0'
+    groups:
+      composer-deps:
+        patterns:
+          - '*'
+
+  # ---------- 2.x ----------
+
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: 2.x
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions-deps:
+        patterns:
+          - '*'
+
+  - package-ecosystem: composer
+    directory: /
+    target-branch: 2.x
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: filament/*
+        versions:
+          - '>=5.0'
+    groups:
+      composer-deps:
+        patterns:
+          - '*'
+
+  # ---------- 3.x ----------
+
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: 3.x
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions-deps:
+        patterns:
+          - '*'
+
+  - package-ecosystem: composer
+    directory: /
+    target-branch: 3.x
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: filament/*
+        versions:
+          - '>=6.0'
+    groups:
+      composer-deps:
+        patterns:
+          - '*'
