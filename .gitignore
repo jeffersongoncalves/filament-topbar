@@ -11,3 +11,4 @@ vendor
 node_modules
 
 .claude/settings.local.json
+.phpunit.cache
